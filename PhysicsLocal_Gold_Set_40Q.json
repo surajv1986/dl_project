@@ -1,0 +1,1080 @@
+{
+  "title": "PhysicsLocal: source-checked starter gold set",
+  "version": "1.0-draft",
+  "prepared_date": "2026-10-25",
+  "language": "English",
+  "status": "Source-checked reference questions. Not an official MIT benchmark. The two group members should verify the answers, annotate supporting chunk IDs, and sign off before freezing the test split.",
+  "source_attribution": "Peter Dourmashkin, Classical Mechanics: MIT 8.01 Course Notes, distributed by MIT OpenCourseWare. Questions and answers are newly written paraphrases. MIT does not endorse this project.",
+  "source_index_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/pages/online-textbook/",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "license_notice": "Noncommercial educational derivative reference set. Retain attribution and the applicable CC BY-NC-SA terms. See MIT OCW source notices for exceptions.",
+  "usage": {
+    "development": "Only these 10 questions may guide prompt and packing choices.",
+    "test": "Freeze these 30 questions and the source subset before comparing systems. Keep answers, labels and evidence annotations out of the retrieval index and generation prompts.",
+    "review": "Both group members should check every required key point against the linked PDF page. Resolve disagreements, normalize equivalent units and accepted wording, then record sign-off.",
+    "chunk_mapping": "After chunking the source text, replace null gold_chunk_ids with all chunk IDs that actually contain a complete supporting span. A page number alone does not count as an evidence hit.",
+    "inference_limits": "Use short conceptual questions. The prototype is not a general numerical or symbolic physics solver."
+  },
+  "counts": {
+    "total": 40,
+    "development": 10,
+    "development_answerable": 8,
+    "development_unanswerable": 2,
+    "test": 30,
+    "test_answerable": 24,
+    "test_unanswerable": 6
+  },
+  "scoring": {
+    "answer_accuracy": "Correct non-abstained answers / 24 answerable test questions. Required key points must be present, units valid, and no contradictory or material extra factual claims. Abstentions count as incorrect. Human judgment accepts paraphrases.",
+    "token_f1": "For each answerable test question, token precision = common tokens / predicted tokens; token recall = common tokens / reference tokens; F1 = 2PR/(P+R), with zero if no common tokens. Take the best score over accepted references, then average over 24 questions. Normalize case and equivalent unit notation consistently. This is secondary to semantic correctness.",
+    "exact_match": "Only designated short-answer tests: ['PL-006', 'PL-016', 'PL-032'] (n=3). Match against accepted aliases after case and equivalent-unit normalization. Do not use EM to judge open explanations.",
+    "evidence_hit_at_k": "Answerable questions where at least one top-k passage covers a labeled supporting span / 24. Report for k=1,3,5. Evaluate only after gold chunk mapping is complete.",
+    "supported_answer_rate": "RAG test responses whose factual claims are all supported by the displayed evidence / non-abstained RAG test responses. Report answered count. Mark N/A if the denominator is zero. For no-retrieval baseline, this metric is N/A.",
+    "false_answer_rate": "Non-abstained responses to the six unanswerable test questions / 6. Report as count out of 6 and percentage. Zero is best.",
+    "answer_coverage": "Non-abstained responses to the 24 answerable test questions / 24. Report with supported-answer rate to expose excessive refusal.",
+    "latency": "On the same named machine, report median end-to-end warmed question latency over all 30 tests. Exclude one-time loading and indexing. Also record prompt-token count and peak process RAM."
+  },
+  "group_sign_off": {
+    "reviewer_1": null,
+    "reviewer_2": null,
+    "test_frozen_on": null
+  },
+  "sources": [
+    {
+      "document_id": "MIT-C04",
+      "chapter": 4,
+      "title": "One Dimensional Kinematics",
+      "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf",
+      "source_sha256": "acff3282002ca05f25bd5b0395bcddb78a1144008050130165004d747ab88000",
+      "included_sections": [
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5"
+      ],
+      "preparation": "Retain relevant concept prose and basic equations. Exclude epigraphs, song lyrics, diagrams, worked examples, exercise solutions and unrelated sections. Check extracted equations and PDF reading order."
+    },
+    {
+      "document_id": "MIT-C06",
+      "chapter": 6,
+      "title": "Circular Motion",
+      "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf",
+      "source_sha256": "6c6b09ad0f212d4685037e860824e5a4ec6a02ff24c0a7ad205649e36faac152",
+      "included_sections": [
+        "6.1",
+        "6.2",
+        "6.3",
+        "6.4"
+      ],
+      "preparation": "Retain relevant concept prose and basic equations. Exclude epigraphs, song lyrics, diagrams, worked examples, exercise solutions and unrelated sections. Check extracted equations and PDF reading order."
+    },
+    {
+      "document_id": "MIT-C07",
+      "chapter": 7,
+      "title": "Newton’s Laws of Motion",
+      "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf",
+      "source_sha256": "a8bd3d0b24251600124e09c894d8f495c4e013397ecb77bb03f09b6aeba0dfc4",
+      "included_sections": [
+        "7.1",
+        "7.2",
+        "7.3",
+        "7.4"
+      ],
+      "preparation": "Retain relevant concept prose and basic equations. Exclude epigraphs, song lyrics, diagrams, worked examples, exercise solutions and unrelated sections. Check extracted equations and PDF reading order."
+    },
+    {
+      "document_id": "MIT-C13",
+      "chapter": 13,
+      "title": "Energy, Kinetic Energy, and Work",
+      "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf",
+      "source_sha256": "a6bf0626b4c9446a7b6aec206024b90f611403eb059a8dd7ffc45fe1a98fec00",
+      "included_sections": [
+        "13.2",
+        "13.4",
+        "13.6",
+        "13.7",
+        "13.8"
+      ],
+      "preparation": "Retain relevant concept prose and basic equations. Exclude epigraphs, song lyrics, diagrams, worked examples, exercise solutions and unrelated sections. Check extracted equations and PDF reading order."
+    }
+  ],
+  "questions": [
+    {
+      "id": "PL-001",
+      "split": "development",
+      "answerable": true,
+      "question_type": "short_answer",
+      "question": "Which SI unit measures position?",
+      "reference_answer": "Metre (m).",
+      "acceptable_short_answers": [
+        "metre",
+        "meter",
+        "m"
+      ],
+      "required_key_points": [
+        "metre"
+      ],
+      "fact_family": "C4-4.2.1-1",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 3,
+          "section": "4.2.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=3"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-002",
+      "split": "development",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What is displacement?",
+      "reference_answer": "Final position minus initial position.",
+      "acceptable_short_answers": [
+        "change in position",
+        "final minus initial position"
+      ],
+      "required_key_points": [
+        "signed position change"
+      ],
+      "fact_family": "C4-4.2.3-2",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 3,
+          "section": "4.2.3",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=3"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-003",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How is average velocity calculated?",
+      "reference_answer": "Displacement divided by elapsed time.",
+      "acceptable_short_answers": [
+        "Displacement divided by elapsed time."
+      ],
+      "required_key_points": [
+        "displacement / elapsed time"
+      ],
+      "fact_family": "C4-4.3.1-3",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 4,
+          "section": "4.3.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=4"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-004",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What gives instantaneous velocity on a position-time graph?",
+      "reference_answer": "Its tangent slope at that instant.",
+      "acceptable_short_answers": [
+        "Its tangent slope at that instant."
+      ],
+      "required_key_points": [
+        "instantaneous tangent slope"
+      ],
+      "fact_family": "C4-4.3.3-4",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 5,
+          "section": "4.3.3",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=5"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-005",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How is average acceleration calculated?",
+      "reference_answer": "Velocity change divided by elapsed time.",
+      "acceptable_short_answers": [
+        "Velocity change divided by elapsed time."
+      ],
+      "required_key_points": [
+        "velocity change / elapsed time"
+      ],
+      "fact_family": "C4-4.4.1-5",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 9,
+          "section": "4.4.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=9"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-006",
+      "split": "test",
+      "answerable": true,
+      "question_type": "short_answer",
+      "question": "Which SI unit measures acceleration?",
+      "reference_answer": "Metres per second squared.",
+      "acceptable_short_answers": [
+        "m/s^2",
+        "m s^-2",
+        "metres per second squared",
+        "meters per second squared"
+      ],
+      "required_key_points": [
+        "m/s^2"
+      ],
+      "fact_family": "C4-4.4.1-6",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 9,
+          "section": "4.4.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=9"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-007",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "For constant acceleration, what is the velocity-time area?",
+      "reference_answer": "The displacement over the interval.",
+      "acceptable_short_answers": [
+        "The displacement over the interval."
+      ],
+      "required_key_points": [
+        "signed displacement"
+      ],
+      "fact_family": "C4-4.5.2-7",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 12,
+          "section": "4.5.2",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=12"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-008",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What does the acceleration-time area give?",
+      "reference_answer": "The change in velocity.",
+      "acceptable_short_answers": [
+        "The change in velocity."
+      ],
+      "required_key_points": [
+        "velocity change"
+      ],
+      "fact_family": "C4-4.5.1-8",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C04",
+          "pdf_page_1_based": 11,
+          "section": "4.5.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter4.pdf#page=11"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-009",
+      "split": "development",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "Which way does circular-motion velocity point?",
+      "reference_answer": "Tangent to the circle.",
+      "acceptable_short_answers": [
+        "Tangent to the circle."
+      ],
+      "required_key_points": [
+        "tangent direction"
+      ],
+      "fact_family": "C6-6.1-9",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 2,
+          "section": "6.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=2"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-010",
+      "split": "development",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What is the period of uniform circular motion?",
+      "reference_answer": "Time for one complete orbit.",
+      "acceptable_short_answers": [
+        "Time for one complete orbit."
+      ],
+      "required_key_points": [
+        "time / complete orbit"
+      ],
+      "fact_family": "C6-6.4-10",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 9,
+          "section": "6.4",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=9"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-011",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "Why does uniform circular motion have acceleration?",
+      "reference_answer": "The velocity direction keeps changing.",
+      "acceptable_short_answers": [
+        "The velocity direction keeps changing."
+      ],
+      "required_key_points": [
+        "changing velocity direction"
+      ],
+      "fact_family": "C6-6.1-11",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 2,
+          "section": "6.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=2"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-012",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "Which way does centripetal acceleration point?",
+      "reference_answer": "Inward, toward the circle centre.",
+      "acceptable_short_answers": [
+        "Inward, toward the circle centre."
+      ],
+      "required_key_points": [
+        "toward the centre"
+      ],
+      "fact_family": "C6-6.3-12",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 8,
+          "section": "6.3",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=8"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-013",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "Which acceleration component changes circular-motion speed?",
+      "reference_answer": "The tangential component.",
+      "acceptable_short_answers": [
+        "The tangential component."
+      ],
+      "required_key_points": [
+        "tangential acceleration"
+      ],
+      "fact_family": "C6-6.1-13",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 2,
+          "section": "6.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=2"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-014",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How are frequency and period related?",
+      "reference_answer": "Frequency is the reciprocal period.",
+      "acceptable_short_answers": [
+        "Frequency is the reciprocal period."
+      ],
+      "required_key_points": [
+        "f = 1/T"
+      ],
+      "fact_family": "C6-6.4-14",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 9,
+          "section": "6.4",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=9"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-015",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How are speed, radius and angular speed related?",
+      "reference_answer": "Speed equals radius times angular speed.",
+      "acceptable_short_answers": [
+        "Speed equals radius times angular speed."
+      ],
+      "required_key_points": [
+        "v = r omega"
+      ],
+      "fact_family": "C6-6.2.1-15",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 6,
+          "section": "6.2.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=6"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-016",
+      "split": "test",
+      "answerable": true,
+      "question_type": "short_answer",
+      "question": "What is tangential acceleration in uniform circular motion?",
+      "reference_answer": "Zero.",
+      "acceptable_short_answers": [
+        "zero",
+        "0"
+      ],
+      "required_key_points": [
+        "zero tangential acceleration"
+      ],
+      "fact_family": "C6-6.4-16",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C06",
+          "pdf_page_1_based": 8,
+          "section": "6.4",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter6.pdf#page=8"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-017",
+      "split": "development",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How do simultaneous forces combine?",
+      "reference_answer": "By vector addition.",
+      "acceptable_short_answers": [
+        "By vector addition."
+      ],
+      "required_key_points": [
+        "vector sum"
+      ],
+      "fact_family": "C7-7.1-17",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 4,
+          "section": "7.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=4"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-018",
+      "split": "development",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "For equal forces, how do mass and acceleration compare?",
+      "reference_answer": "Mass is inversely proportional to acceleration.",
+      "acceptable_short_answers": [
+        "Mass is inversely proportional to acceleration."
+      ],
+      "required_key_points": [
+        "inverse mass-acceleration relation"
+      ],
+      "fact_family": "C7-7.1.1-18",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 5,
+          "section": "7.1.1",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=5"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-019",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "With zero net force, how does velocity behave?",
+      "reference_answer": "It remains constant, including possible rest.",
+      "acceptable_short_answers": [
+        "It remains constant, including possible rest."
+      ],
+      "required_key_points": [
+        "constant velocity"
+      ],
+      "fact_family": "C7-7.2-19",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 6,
+          "section": "7.2",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=6"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-020",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How is linear momentum defined?",
+      "reference_answer": "Mass multiplied by velocity.",
+      "acceptable_short_answers": [
+        "Mass multiplied by velocity."
+      ],
+      "required_key_points": [
+        "p = m v"
+      ],
+      "fact_family": "C7-7.3-20",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 7,
+          "section": "7.3",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=7"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-021",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What is net force in momentum form?",
+      "reference_answer": "The time derivative of momentum.",
+      "acceptable_short_answers": [
+        "The time derivative of momentum."
+      ],
+      "required_key_points": [
+        "F_net = dp/dt"
+      ],
+      "fact_family": "C7-7.3-21",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 8,
+          "section": "7.3",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=8"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-022",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "For constant mass, what is Newton’s second law?",
+      "reference_answer": "Net force equals mass times acceleration.",
+      "acceptable_short_answers": [
+        "Net force equals mass times acceleration."
+      ],
+      "required_key_points": [
+        "F_net = m a"
+      ],
+      "fact_family": "C7-7.3-22",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 8,
+          "section": "7.3",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=8"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-023",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How do interaction-pair forces compare?",
+      "reference_answer": "Their magnitudes match and directions oppose.",
+      "acceptable_short_answers": [
+        "Their magnitudes match and directions oppose."
+      ],
+      "required_key_points": [
+        "equal magnitude",
+        "opposite directions"
+      ],
+      "fact_family": "C7-7.4-23",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 9,
+          "section": "7.4",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=9"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-024",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "Do action-reaction forces act on one body?",
+      "reference_answer": "No. They act on different bodies.",
+      "acceptable_short_answers": [
+        "No. They act on different bodies."
+      ],
+      "required_key_points": [
+        "different bodies"
+      ],
+      "fact_family": "C7-7.4-24",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C07",
+          "pdf_page_1_based": 9,
+          "section": "7.4",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf#page=9"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-025",
+      "split": "development",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "Kinetic energy is associated with what?",
+      "reference_answer": "Motion of a body.",
+      "acceptable_short_answers": [
+        "Motion of a body."
+      ],
+      "required_key_points": [
+        "motion"
+      ],
+      "fact_family": "C13-13.2-25",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 6,
+          "section": "13.2",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=6"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-026",
+      "split": "development",
+      "answerable": true,
+      "question_type": "short_answer",
+      "question": "Which SI unit measures kinetic energy?",
+      "reference_answer": "The joule (J).",
+      "acceptable_short_answers": [
+        "joule",
+        "joules",
+        "J"
+      ],
+      "required_key_points": [
+        "joule"
+      ],
+      "fact_family": "C13-13.2-26",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 6,
+          "section": "13.2",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=6"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-027",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What is a non-rotating body’s classical kinetic energy?",
+      "reference_answer": "One-half mass times speed squared.",
+      "acceptable_short_answers": [
+        "One-half mass times speed squared."
+      ],
+      "required_key_points": [
+        "K = (1/2) m v^2"
+      ],
+      "fact_family": "C13-13.2-27",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 6,
+          "section": "13.2",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=6"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-028",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept_inference",
+      "question": "What work does a perpendicular constant force do?",
+      "reference_answer": "Zero work.",
+      "acceptable_short_answers": [
+        "zero",
+        "zero work",
+        "0"
+      ],
+      "required_key_points": [
+        "perpendicular dot product is zero"
+      ],
+      "fact_family": "C13-13.8.2-28",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 26,
+          "section": "13.8.2",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=26"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-029",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What does the net work-kinetic-energy theorem state?",
+      "reference_answer": "Net work equals the kinetic-energy change.",
+      "acceptable_short_answers": [
+        "Net work equals the kinetic-energy change."
+      ],
+      "required_key_points": [
+        "W_net = delta K"
+      ],
+      "fact_family": "C13-13.6-29",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 17,
+          "section": "13.6",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=17"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-030",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "What does negative net work do to speed?",
+      "reference_answer": "It decreases the speed.",
+      "acceptable_short_answers": [
+        "It decreases the speed."
+      ],
+      "required_key_points": [
+        "speed decreases"
+      ],
+      "fact_family": "C13-13.6-30",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 17,
+          "section": "13.6",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=17"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-031",
+      "split": "test",
+      "answerable": true,
+      "question_type": "concept",
+      "question": "How is average power defined?",
+      "reference_answer": "Work done divided by elapsed time.",
+      "acceptable_short_answers": [
+        "Work done divided by elapsed time."
+      ],
+      "required_key_points": [
+        "work / elapsed time"
+      ],
+      "fact_family": "C13-13.7-31",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 19,
+          "section": "13.7",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=19"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-032",
+      "split": "test",
+      "answerable": true,
+      "question_type": "short_answer",
+      "question": "Which SI unit measures power?",
+      "reference_answer": "Watt: one joule per second.",
+      "acceptable_short_answers": [
+        "watt",
+        "watts",
+        "W",
+        "joule per second",
+        "J/s"
+      ],
+      "required_key_points": [
+        "watt",
+        "J/s"
+      ],
+      "fact_family": "C13-13.7-32",
+      "gold_evidence": [
+        {
+          "document_id": "MIT-C13",
+          "pdf_page_1_based": 19,
+          "section": "13.7",
+          "source_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf#page=19"
+        }
+      ],
+      "gold_chunk_ids": null,
+      "verification_status": "source_checked_draft; group sign-off and chunk mapping pending"
+    },
+    {
+      "id": "PL-033",
+      "split": "development",
+      "answerable": false,
+      "question_type": "out_of_corpus",
+      "question": "What is the numerical value of Planck’s constant?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-33",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "This value is outside the selected mechanics reading subset.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-034",
+      "split": "development",
+      "answerable": false,
+      "question_type": "missing_case_data",
+      "question": "What mass did our red cart have in today’s lab?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-34",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "No measurements from this lab appear in the reading corpus.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-035",
+      "split": "test",
+      "answerable": false,
+      "question_type": "out_of_corpus",
+      "question": "What is copper’s thermal conductivity at 20 degrees Celsius?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-35",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "The selected mechanics sections contain no such material datum.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-036",
+      "split": "test",
+      "answerable": false,
+      "question_type": "out_of_corpus",
+      "question": "What is the SI numerical value of vacuum permittivity?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-36",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "Electromagnetic constants are outside the selected sections.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-037",
+      "split": "test",
+      "answerable": false,
+      "question_type": "out_of_corpus",
+      "question": "What wavelength is the hydrogen H-alpha line?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-37",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "Atomic spectral data are outside the selected sections.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-038",
+      "split": "test",
+      "answerable": false,
+      "question_type": "out_of_corpus",
+      "question": "What is water’s refractive index at 589 nanometres?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-38",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "Optical material data are outside the selected sections.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-039",
+      "split": "test",
+      "answerable": false,
+      "question_type": "missing_case_data",
+      "question": "What friction coefficient did we measure for our bench?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-39",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "The corpus contains no measurements of the group’s bench.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    },
+    {
+      "id": "PL-040",
+      "split": "test",
+      "answerable": false,
+      "question_type": "missing_case_data",
+      "question": "What is our cart’s numerical kinetic energy if its mass and speed are unspecified?",
+      "reference_answer": "Not found in the local notes.",
+      "acceptable_short_answers": [
+        "Not found in the local notes.",
+        "Insufficient information in the supplied notes."
+      ],
+      "required_key_points": [
+        "Abstain from giving the requested factual value."
+      ],
+      "fact_family": "UNSUPPORTED-40",
+      "gold_evidence": [],
+      "gold_chunk_ids": [],
+      "unanswerable_reason": "A numerical value needs the missing mass and speed. A formula alone does not answer this question.",
+      "verification_status": "checked against the defined source subset; group sign-off pending"
+    }
+  ]
+}
