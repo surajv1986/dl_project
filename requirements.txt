@@ -1,0 +1,3 @@
+# The dataset pipeline, BM25 baseline and offline check require Python >= 3.10.
+# They use only the standard library. No pip install is needed.
+# Dense embedding and generation dependencies will be added in a later stage.
